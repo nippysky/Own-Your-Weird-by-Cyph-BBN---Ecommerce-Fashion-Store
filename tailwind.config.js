@@ -1,8 +1,17 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [],
+  content: [
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+  ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        clayBrown: "#131814",
+        chocoBrown: "#512116",
+        formBG: "#D9D9D9",
+      },
+    },
   },
-  plugins: [],
-}
+  plugins: [require("@tailwindcss/forms"), require("tailwind-scrollbar-hide")],
+};
