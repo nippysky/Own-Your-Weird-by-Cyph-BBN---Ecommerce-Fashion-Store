@@ -38,7 +38,7 @@ export default function LoginForm() {
           className="w-full h-14 p-5 bg-formBG2 border-none focus:ring-0"
           type="email"
           id="email"
-          name="name"
+          name="email"
           placeholder="Email"
         />
       </div>
@@ -56,7 +56,7 @@ export default function LoginForm() {
             onChange={(event) => setPassword(event.target.value)}
             value={password}
             required
-            className="w-[90%] h-14 p-5 bg-formBG2 border-none focus:ring-0 focus:ring-chocoBrown"
+            className="w-[90%] h-14 p-5 bg-formBG2 border-none focus:ring-0"
             type={showPassword ? "text" : "password"}
             id="password"
             name="name"
