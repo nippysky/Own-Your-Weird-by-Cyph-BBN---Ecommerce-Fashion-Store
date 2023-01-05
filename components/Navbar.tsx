@@ -43,11 +43,13 @@ export default function Navbar() {
         </Link>
 
         <Link href={"/"}>
-          <div className="flex">
+          <div className="flex relative">
             {/* bag */}
-            <HiOutlineShoppingBag size={22} />
+            <HiOutlineShoppingBag size={25} />
             {/* count circle */}
-            <div className="w-[20px] h-[20px] bg-chocoBrown rounded-full"></div>
+            <div className="w-[15px] h-[15px] bg-chocoBrown rounded-full absolute bottom-0 -right-2 flex justify-center items-center text-white">
+              <small className="text-[0.65rem] font-bold">0</small>
+            </div>
           </div>
         </Link>
       </nav>

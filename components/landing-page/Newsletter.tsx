@@ -23,7 +23,7 @@ export default function Newsletter() {
             onChange={(event) => setEmail(event.target.value)}
             value={email}
             required
-            className="w-full h-14 p-5 bg-formBG dark:bg-darkBG2 border-none focus:ring-1 focus:ring-chocoBrown"
+            className="w-full h-14 p-5 bg-formBG border-none focus:ring-0"
             type="email"
             name="email"
             placeholder="Enter Your Email Address"

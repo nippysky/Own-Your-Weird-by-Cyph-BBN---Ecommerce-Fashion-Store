@@ -10,6 +10,7 @@ module.exports = {
         clayBrown: "#131814",
         chocoBrown: "#512116",
         formBG: "#D9D9D9",
+        formBG2: "#F5EEE9",
       },
     },
   },
