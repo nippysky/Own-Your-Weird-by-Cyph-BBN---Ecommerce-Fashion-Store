@@ -1,11 +1,14 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { RxPerson } from "react-icons/rx";
 
 export default function Navbar() {
+  const { asPath } = useRouter();
+
   return (
     <header className="w-full flex flex-1 justify-between items-center relative bottom-5">
       {/* Logo */}
@@ -23,14 +26,26 @@ export default function Navbar() {
 
       {/* Menu Links */}
       <nav className="flex gap-10 justify-center items-center">
-        <Link href={"/"}>
-          <span className="font-medium tracking-widest text-[0.85rem]">
+        <Link href={"/shop/unisex"}>
+          <span
+            className={`font-medium tracking-widest text-[0.85rem] ${
+              asPath === "/shop/unisex"
+                ? "bg-chocoBrown text-white px-2 py-1"
+                : "null"
+            }`}
+          >
             UNISEX
           </span>
         </Link>
 
-        <Link href={"/"}>
-          <span className="font-medium tracking-widest text-[0.85rem]">
+        <Link href={"/shop/female"}>
+          <span
+            className={`font-medium tracking-widest text-[0.85rem] ${
+              asPath === "/shop/female"
+                ? "bg-clayBrown text-white px-2 py-1"
+                : "null"
+            }`}
+          >
             FEMALE
           </span>
         </Link>
@@ -42,16 +57,28 @@ export default function Navbar() {
           <RxPerson size={22} />
         </Link>
 
-        <Link href={"/"}>
-          <div className="flex relative">
-            {/* bag */}
-            <HiOutlineShoppingBag size={25} />
-            {/* count circle */}
-            <div className="w-[15px] h-[15px] bg-chocoBrown rounded-full absolute bottom-0 -right-2 flex justify-center items-center text-white">
-              <small className="text-[0.65rem] font-bold">0</small>
+        <div
+          className={` ${
+            asPath === "/shop/bag"
+              ? "bg-clayBrown text-white px-4 py-3"
+              : "null"
+          }`}
+        >
+          <Link href={"/shop/bag"}>
+            <div className={`flex relative`}>
+              {/* bag */}
+              <HiOutlineShoppingBag size={25} />
+              {/* count circle */}
+              <div
+                className={`w-[15px] h-[15px] bg-chocoBrown rounded-full absolute bottom-0 -right-2 flex justify-center items-center text-white ${
+                  asPath === "/shop/bag" ? "bg-white text-black" : "null"
+                }`}
+              >
+                <small className="text-[0.65rem] font-bold">0</small>
+              </div>
             </div>
-          </div>
-        </Link>
+          </Link>
+        </div>
       </nav>
     </header>
   );

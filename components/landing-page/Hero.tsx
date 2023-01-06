@@ -1,11 +1,10 @@
 import React from "react";
-import Image from "next/image";
 import Navbar from "../Navbar";
 
 export default function Hero() {
   return (
     <section
-      className="w-full h-screen bg-cover px-5 lg:px-20 flex justify-between flex-col"
+      className="w-full lg:h-screen bg-cover px-5 lg:px-20 flex justify-between flex-col"
       style={{
         backgroundImage: "url('/brand/HeroCover.svg')",
       }}
@@ -16,7 +15,7 @@ export default function Hero() {
 
       <div className=" w-full lg:px-[15rem] px-5 flex justify-center">
         <div>
-          <h1 className="text-center font-black text-clayBrown text-[3rem] tracking-[.16em] ">
+          <h1 className="text-center font-black text-clayBrown lg:text-[3rem] text-[2rem] tracking-[.16em] ">
             OWN YOUR WEIRD LAUNCH COLLECTION
           </h1>
 

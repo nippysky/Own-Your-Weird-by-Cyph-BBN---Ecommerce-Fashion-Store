@@ -7,13 +7,13 @@ export default function Newsletter() {
 
   return (
     <section
-      className="w-full h-screen bg-center bg-cover flex relative"
+      className="w-full lg:h-screen bg-center bg-cover lg:flex relative py-10"
       style={{
         backgroundImage: "url('/brand/NewsletterCover.svg')",
       }}
     >
       <div className="m-auto lg:px-80 px-5">
-        <h1 className="text-3xl font-semibold text-clayBrown text-center lg:px-20">
+        <h1 className="lg:text-3xl text-xl font-semibold text-clayBrown text-center lg:px-20">
           Connect With CYPH , Get Updates by Joining Our Newsletter
         </h1>
 
@@ -36,7 +36,7 @@ export default function Newsletter() {
       </div>
 
       {/* Social Icons */}
-      <div className="absolute bottom-10 left-20 flex justify-start gap-10">
+      <div className="lg:absolute lg:bottom-10 lg:left-20 flex justify-start gap-5 mt-10 px-5">
         {/* twitter */}
         <Link href={"/"}>
           <div className="w-[50px] h-[50px] bg-clayBrown rounded-full flex justify-center items-center">

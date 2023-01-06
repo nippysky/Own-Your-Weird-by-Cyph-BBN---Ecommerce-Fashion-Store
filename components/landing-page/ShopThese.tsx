@@ -3,9 +3,9 @@ import React from "react";
 
 export default function ShopThese() {
   return (
-    <section className="flex w-full gap-0">
+    <section className="lg:flex lg:flex-row flex-col w-full gap-0">
       <div
-        className="bg-chocoBrown bg-cover bg-center w-1/2 h-[300px]"
+        className="bg-chocoBrown bg-cover bg-center w-full lg:w-1/2 h-[300px]"
         style={{
           backgroundImage: "url('/brand/short.jpeg')",
         }}
@@ -19,7 +19,7 @@ export default function ShopThese() {
       </div>
 
       <div
-        className="bg-chocoBrown bg-cover bg-center w-1/2 h-[300px]"
+        className="bg-chocoBrown bg-cover bg-center w-full lg:w-1/2 h-[300px]"
         style={{
           backgroundImage: "url('/brand/shirt.jpeg')",
         }}
