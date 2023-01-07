@@ -1,7 +1,7 @@
 export default {
-  name: 'product',
+  name: 'sweatshirt',
   type: 'document',
-  title: 'Product',
+  title: 'Sweatshirt',
   fields: [
     {
       name: 'name',
@@ -21,11 +21,6 @@ export default {
       name: 'price',
       type: 'number',
       title: 'Price',
-    },
-    {
-      name: 'category',
-      type: 'string',
-      title: 'Category',
     },
     {
       name: 'color',

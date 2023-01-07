@@ -1,22 +1,16 @@
+import Head from "next/head";
 import React from "react";
 import Navbar from "../../components/Navbar";
-import Head from "next/head";
 import Footer from "../../components/Footer";
-import UnisexFeed from "../../components/shop/UnisexFeed";
 
 import { createClient } from "next-sanity";
+import SweatshirtFeed from "../../components/shop/SweatshirtFeed";
 
-export default function Unisex({
-  unisex,
-  sweatshirt,
-}: {
-  unisex: object[];
-  sweatshirt: object[];
-}) {
+export default function Sweatshirt({ sweatshirt }: { sweatshirt: object[] }) {
   return (
     <>
       <Head>
-        <title>Unisex - Own Your Weird</title>
+        <title>Sweatshirt - Own Your Weird</title>
         <meta
           name="description"
           content="Own Your Weird is an urban street clothing and lifestyle brand which embodies the weird in everyone."
@@ -30,7 +24,7 @@ export default function Unisex({
       </header>
 
       <main className="w-full px-5 lg:px-32 py-10">
-        <UnisexFeed unisex={unisex} sweatshirt={sweatshirt} />
+        <SweatshirtFeed sweatshirt={sweatshirt} />
       </main>
 
       <footer>
@@ -48,10 +42,9 @@ const client = createClient({
 });
 
 export async function getStaticProps() {
-  const unisex = await client.fetch(`*[_type == "unisex"]`);
   const sweatshirt = await client.fetch(`*[_type == "sweatshirt"]`);
 
-  if (!unisex || !sweatshirt) {
+  if (!sweatshirt) {
     return {
       notfound: true,
     };
@@ -59,7 +52,6 @@ export async function getStaticProps() {
 
   return {
     props: {
-      unisex,
       sweatshirt,
     },
     revalidate: 1800,
