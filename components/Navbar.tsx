@@ -42,11 +42,23 @@ export default function Navbar() {
           <span
             className={`font-medium tracking-widest text-[0.85rem] ${
               asPath === "/shop/female"
-                ? "bg-clayBrown text-white px-2 py-1"
+                ? "bg-chocoBrown text-white px-2 py-1"
                 : "null"
             }`}
           >
             FEMALE
+          </span>
+        </Link>
+
+        <Link href={"/shop/sweatshirt"}>
+          <span
+            className={`font-medium tracking-widest text-[0.85rem] ${
+              asPath === "/shop/sweatshirt"
+                ? "bg-chocoBrown text-white px-2 py-1"
+                : "null"
+            }`}
+          >
+            SWEATSHIRT
           </span>
         </Link>
       </nav>

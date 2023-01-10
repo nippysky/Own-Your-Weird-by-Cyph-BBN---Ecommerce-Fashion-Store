@@ -1,10 +1,10 @@
 import Head from "next/head";
 import React from "react";
-import Navbar from "../../components/Navbar";
-import Footer from "../../components/Footer";
+import Navbar from "../../../components/Navbar";
+import Footer from "../../../components/Footer";
 
 import { createClient } from "next-sanity";
-import SweatshirtFeed from "../../components/shop/SweatshirtFeed";
+import SweatshirtFeed from "../../../components/shop/SweatshirtFeed";
 
 export default function Sweatshirt({ sweatshirt }: { sweatshirt: object[] }) {
   return (
@@ -54,6 +54,6 @@ export async function getStaticProps() {
     props: {
       sweatshirt,
     },
-    revalidate: 1800,
+    revalidate: 360,
   };
 }

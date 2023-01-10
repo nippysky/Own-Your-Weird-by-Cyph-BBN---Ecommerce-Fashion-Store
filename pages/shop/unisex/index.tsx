@@ -1,18 +1,12 @@
 import React from "react";
-import Navbar from "../../components/Navbar";
+import Navbar from "../../../components/Navbar";
 import Head from "next/head";
-import Footer from "../../components/Footer";
-import UnisexFeed from "../../components/shop/UnisexFeed";
+import Footer from "../../../components/Footer";
+import UnisexFeed from "../../../components/shop/UnisexFeed";
 
 import { createClient } from "next-sanity";
 
-export default function Unisex({
-  unisex,
-  sweatshirt,
-}: {
-  unisex: object[];
-  sweatshirt: object[];
-}) {
+export default function Unisex({ unisex }: { unisex: object[] }) {
   return (
     <>
       <Head>
@@ -30,7 +24,7 @@ export default function Unisex({
       </header>
 
       <main className="w-full px-5 lg:px-32 py-10">
-        <UnisexFeed unisex={unisex} sweatshirt={sweatshirt} />
+        <UnisexFeed unisex={unisex} />
       </main>
 
       <footer>
@@ -49,9 +43,8 @@ const client = createClient({
 
 export async function getStaticProps() {
   const unisex = await client.fetch(`*[_type == "unisex"]`);
-  const sweatshirt = await client.fetch(`*[_type == "sweatshirt"]`);
 
-  if (!unisex || !sweatshirt) {
+  if (!unisex) {
     return {
       notfound: true,
     };
@@ -60,8 +53,7 @@ export async function getStaticProps() {
   return {
     props: {
       unisex,
-      sweatshirt,
     },
-    revalidate: 1800,
+    revalidate: 360,
   };
 }

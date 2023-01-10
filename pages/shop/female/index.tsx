@@ -1,18 +1,12 @@
 import Head from "next/head";
 import React from "react";
-import Navbar from "../../components/Navbar";
-import Footer from "../../components/Footer";
+import Navbar from "../../../components/Navbar";
+import Footer from "../../../components/Footer";
+import FemaleFeed from "../../../components/shop/FemaleFeed";
 
 import { createClient } from "next-sanity";
-import FemaleFeed from "../../components/shop/FemaleFeed";
 
-export default function Female({
-  female,
-  sweatshirt,
-}: {
-  female: object[];
-  sweatshirt: object[];
-}) {
+export default function Female({ female }: { female: object[] }) {
   return (
     <>
       <Head>
@@ -30,7 +24,7 @@ export default function Female({
       </header>
 
       <main className="w-full px-5 lg:px-32 py-10">
-        <FemaleFeed female={female} sweatshirt={sweatshirt} />
+        <FemaleFeed female={female} />
       </main>
 
       <footer>
@@ -49,9 +43,8 @@ const client = createClient({
 
 export async function getStaticProps() {
   const female = await client.fetch(`*[_type == "female"]`);
-  const sweatshirt = await client.fetch(`*[_type == "sweatshirt"]`);
 
-  if (!female || !sweatshirt) {
+  if (!female) {
     return {
       notfound: true,
     };
@@ -60,8 +53,7 @@ export async function getStaticProps() {
   return {
     props: {
       female,
-      sweatshirt,
     },
-    revalidate: 1800,
+    revalidate: 360,
   };
 }

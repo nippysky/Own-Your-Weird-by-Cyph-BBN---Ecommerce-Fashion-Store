@@ -8,7 +8,7 @@ export default function SweatshirtFeed({ sweatshirt }: any) {
     <section className="w-full grid md:grid-cols-2 lg:grid-cols-3 gap-10 place-items-center">
       {sweatshirt.map((sweatshirt: any) => (
         <div key={sweatshirt._id}>
-          <Link href={`/shop/${sweatshirt.slug.current}`}>
+          <Link href={`/shop/sweatshirt/${sweatshirt.slug.current}`}>
             {/* image */}
             <div className="">
               <Image

@@ -3,14 +3,12 @@ import React from "react";
 import urlFor from "../../utils/sanity-image";
 import Image from "next/image";
 
-export default function FemaleFeed({ female, sweatshirt }: any) {
-  const femaleOutfits = [...female, ...sweatshirt];
-
+export default function FemaleFeed({ female }: any) {
   return (
     <section className="w-full grid md:grid-cols-2 lg:grid-cols-3 gap-10 place-items-center">
-      {femaleOutfits.map((outfit: any) => (
+      {female.map((outfit: any) => (
         <div key={outfit._id}>
-          <Link href={`/shop/${outfit.slug.current}`}>
+          <Link href={`/shop/female/${outfit.slug.current}`}>
             {/* image */}
             <div className="">
               <Image
