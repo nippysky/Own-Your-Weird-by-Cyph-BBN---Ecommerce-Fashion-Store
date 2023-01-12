@@ -7,12 +7,13 @@ import Navbar from "../../../components/Navbar";
 import client from "../../../utils/client";
 import urlFor from "../../../utils/sanity-image";
 import { BsArrowLeft } from "react-icons/bs";
-
 import { useDispatch } from "react-redux";
 import { addToBag } from "../../../redux/slices/bagSlice";
+import { useRouter } from "next/router";
 
 export default function SweatshirtProductDetails(props: any) {
   const { slug } = props;
+  const router = useRouter();
   const [state, setState] = useState({
     sweatshirt: null,
     loading: true,
@@ -82,16 +83,17 @@ export default function SweatshirtProductDetails(props: any) {
         <section className="w-full px-5 lg:px-32 py-3">
           {/* go back arrow */}
           <div className="lg:w-1/4 w-full">
-            <Link href={"/shop/sweatshirt"}>
-              <div className="flex text-black">
-                <span>
-                  <BsArrowLeft size={22} />
-                </span>
-                <span className="relative bottom-[1px] left-2 font-medium">
-                  Go Back
-                </span>
-              </div>
-            </Link>
+            <div
+              className="flex text-black cursor-pointer"
+              onClick={() => router.back()}
+            >
+              <span>
+                <BsArrowLeft size={22} />
+              </span>
+              <span className="relative bottom-[1px] left-2 font-medium">
+                Go Back
+              </span>
+            </div>
           </div>
 
           {/* product details */}
