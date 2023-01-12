@@ -6,8 +6,12 @@ import { useRouter } from "next/router";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { RxPerson } from "react-icons/rx";
 
+import { useSelector } from "react-redux";
+import { selectItems } from "../redux/slices/bagSlice";
+
 export default function Navbar() {
   const { asPath } = useRouter();
+  const items = useSelector(selectItems);
 
   return (
     <header className="w-full flex flex-1 justify-between items-center relative bottom-5">
@@ -86,7 +90,9 @@ export default function Navbar() {
                   asPath === "/shop/bag" ? "bg-white text-black" : "null"
                 }`}
               >
-                <small className="text-[0.65rem] font-bold">0</small>
+                <small className="text-[0.65rem] font-bold">
+                  {items.length}
+                </small>
               </div>
             </div>
           </Link>

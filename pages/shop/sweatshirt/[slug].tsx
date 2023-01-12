@@ -8,6 +8,9 @@ import client from "../../../utils/client";
 import urlFor from "../../../utils/sanity-image";
 import { BsArrowLeft } from "react-icons/bs";
 
+import { useDispatch } from "react-redux";
+import { addToBag } from "../../../redux/slices/bagSlice";
+
 export default function SweatshirtProductDetails(props: any) {
   const { slug } = props;
   const [state, setState] = useState({
@@ -25,7 +28,7 @@ export default function SweatshirtProductDetails(props: any) {
   // store order details for color,size and amount
   const [size, setSize] = useState<string>("");
   const [color, setColor] = useState<string>("");
-  const [quantity, setQuantity] = useState<number>(0);
+  const [quantity, setQuantity] = useState<number>(1);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,6 +47,18 @@ export default function SweatshirtProductDetails(props: any) {
     };
     fetchData();
   }, []);
+
+  // Redux Dispatch
+  const dispatch = useDispatch();
+
+  // ADD ITEM TO BAG
+  const addItemToBag = () => {
+    if (size === "" || color === "") return;
+    const newSweatshirt = { ...sweatshirt, price: sweatshirt.price * quantity };
+    const product = { ...newSweatshirt, size, color, quantity };
+    // send product as an action to redux store.. The Bag Slice
+    dispatch(addToBag(product));
+  };
 
   return (
     <>
@@ -64,7 +79,7 @@ export default function SweatshirtProductDetails(props: any) {
       {loading ? (
         <p>...loading</p>
       ) : (
-        <main className="w-full px-5 lg:px-32 py-3">
+        <section className="w-full px-5 lg:px-32 py-3">
           {/* go back arrow */}
           <div className="lg:w-1/4 w-full">
             <Link href={"/shop/sweatshirt"}>
@@ -82,7 +97,7 @@ export default function SweatshirtProductDetails(props: any) {
           {/* product details */}
           <section className="w-full flex-col lg:flex lg:flex-row gap-10 my-10">
             {/* image */}
-            <div className="w-1/2">
+            <div className="lg:w-1/2 w-full flex justify-center lg:justify-start">
               <div>
                 <Image
                   src={`${urlFor(sweatshirt.image)}`}
@@ -95,7 +110,7 @@ export default function SweatshirtProductDetails(props: any) {
             </div>
 
             {/* shopping details */}
-            <div className="w-1/2">
+            <div className="lg:w-1/2 w-full mt-5 lg:mt-0">
               <div>
                 {/* title- Long name */}
                 <h1 className="font-medium tracking-wider capitalize text-2xl">
@@ -104,14 +119,14 @@ export default function SweatshirtProductDetails(props: any) {
 
                 {/* Price and Size */}
                 <div className="w-full flex-col lg:flex lg:flex-row gap-10 justify-between my-10">
-                  <div className="w-1/2">
+                  <div className="lg:w-1/2 w-full">
                     <small className="font-semibold text-gray-500">Price</small>
                     <h4 className="font-bold text-clayBrown text-2xl mt-3">
-                      ₦{sweatshirt.price}
+                      ₦{sweatshirt.price * quantity}
                     </h4>
                   </div>
 
-                  <div className="w-1/2">
+                  <div className="lg:w-1/2 w-full mt-7 lg:mt-0">
                     <small className="font-semibold text-gray-500">Size</small>
                     <select
                       onChange={(event) => setSize(event.target.value)}
@@ -133,7 +148,7 @@ export default function SweatshirtProductDetails(props: any) {
 
                 {/* Quantuty and Color */}
                 <div className="w-full flex-col lg:flex lg:flex-row gap-10 justify-between my-10">
-                  <div className="w-1/2">
+                  <div className="lg:w-1/2 w-full">
                     <small className="font-semibold text-gray-500">
                       Number Of Items
                     </small>
@@ -143,7 +158,7 @@ export default function SweatshirtProductDetails(props: any) {
                       <div
                         className="text-[2.5rem] text-clayBrown cursor-pointer active:bg-formBG2"
                         onClick={() => {
-                          if (quantity === 0) return;
+                          if (quantity === 1) return;
                           setQuantity(quantity - 1);
                         }}
                       >
@@ -167,7 +182,7 @@ export default function SweatshirtProductDetails(props: any) {
                     </div>
                   </div>
 
-                  <div className="w-1/2">
+                  <div className="lg:w-1/2 w-full mt-7 lg:mt-0">
                     <small className="font-semibold text-gray-500">Color</small>
                     <select
                       onChange={(event) => setColor(event.target.value)}
@@ -188,7 +203,10 @@ export default function SweatshirtProductDetails(props: any) {
                 </div>
 
                 {/* Add To Bag Button */}
-                <button className="w-full bg-clayBrown text-center font-semibold text-white py-4 mt-3">
+                <button
+                  className="w-full bg-clayBrown text-center font-semibold text-white py-4 mt-3 active:bg-chocoBrown"
+                  onClick={addItemToBag}
+                >
                   Add To Bag
                 </button>
               </div>
@@ -200,7 +218,7 @@ export default function SweatshirtProductDetails(props: any) {
             <p>...loading</p>
           ) : (
             <section className="my-32">
-              <h1 className="font-semibold tracking-wide text-2xl">
+              <h1 className="font-semibold tracking-wide text-2xl text-center lg:text-left">
                 More From This Collection
               </h1>
 
@@ -244,7 +262,7 @@ export default function SweatshirtProductDetails(props: any) {
               </div>
             </section>
           )}
-        </main>
+        </section>
       )}
     </>
   );

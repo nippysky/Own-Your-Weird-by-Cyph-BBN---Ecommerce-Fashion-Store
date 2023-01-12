@@ -23,9 +23,9 @@ export default function Sweatshirt({ sweatshirt }: { sweatshirt: object[] }) {
         <Navbar />
       </header>
 
-      <main className="w-full px-5 lg:px-32 py-10">
+      <section className="w-full px-5 lg:px-32 py-10">
         <SweatshirtFeed sweatshirt={sweatshirt} />
-      </main>
+      </section>
 
       <footer>
         <Footer />

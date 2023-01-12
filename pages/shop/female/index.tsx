@@ -23,9 +23,9 @@ export default function Female({ female }: { female: object[] }) {
         <Navbar />
       </header>
 
-      <main className="w-full px-5 lg:px-32 py-10">
+      <section className="w-full px-5 lg:px-32 py-10">
         <FemaleFeed female={female} />
-      </main>
+      </section>
 
       <footer>
         <Footer />
