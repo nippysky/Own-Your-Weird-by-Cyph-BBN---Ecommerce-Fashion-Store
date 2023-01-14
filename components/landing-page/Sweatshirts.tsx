@@ -1,5 +1,7 @@
-import Link from "next/link";
 import React from "react";
+import Link from "next/link";
+
+import { motion } from "framer-motion";
 
 export default function Sweatshirts() {
   return (
@@ -16,7 +18,7 @@ export default function Sweatshirts() {
         style.
       </p>
 
-      <Link href={"/"}>
+      <Link href={"/shop/sweatshirt"}>
         <p className="my-14 font-medium tracking-widest underline text-white">
           BUY SWEATSHIRTS
         </p>

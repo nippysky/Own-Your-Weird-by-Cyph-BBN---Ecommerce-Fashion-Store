@@ -1,9 +1,45 @@
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
+import { toast } from "react-toastify";
 import { AiOutlineTwitter, AiOutlineInstagram } from "react-icons/ai";
 
 export default function Newsletter() {
   const [email, setEmail] = useState("");
+
+  // Funtion to handle form when it is submitted
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    // Notify user with a toast message of pending sending of message
+    toast.info("Kindly hold on for few seconds....");
+
+    const form = {
+      email,
+    };
+
+    // Submit Data To API
+    await fetch("/api/newsletter", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(form),
+    }).then((response) => {
+      if (response.status === 200) {
+        // Notify user with a toast message of successfully sending their message
+        toast.success("You Have Subscribed Successfully");
+      } else {
+        if (response.status === 501 || 502 || 503 || 504 || 401 || 403) {
+          // Notify user with a toast message of error trying to send their message
+          toast.error("Error, Check connection");
+        }
+      }
+    });
+
+    // Clear Form Fields
+    setEmail("");
+  }
 
   return (
     <section
@@ -18,7 +54,7 @@ export default function Newsletter() {
         </h1>
 
         {/* Email Field */}
-        <form className="flex gap-0 mt-20">
+        <form className="flex gap-0 mt-20" onSubmit={handleSubmit}>
           <input
             onChange={(event) => setEmail(event.target.value)}
             value={email}

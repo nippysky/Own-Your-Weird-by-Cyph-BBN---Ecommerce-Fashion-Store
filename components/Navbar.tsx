@@ -79,8 +79,13 @@ export default function Navbar() {
           <HiMenuAlt3 size={25} />
         </div>
 
-        <Link href={"/"}>
-          <RxPerson size={22} />
+        <Link href={"/login"}>
+          <div className="flex items-end gap-2 text-[0.85rem] font-medium tracking-widest">
+            <span>
+              <RxPerson size={22} />
+            </span>
+            <span className=" hidden lg:inline">LOGIN</span>
+          </div>
         </Link>
 
         <div

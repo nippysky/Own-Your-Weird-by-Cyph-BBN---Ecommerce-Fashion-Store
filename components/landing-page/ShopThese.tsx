@@ -11,7 +11,7 @@ export default function ShopThese() {
         }}
       >
         <div className="bg-black bg-opacity-50 h-full w-full text-white px-20 flex flex-col justify-center">
-          <Link href={"/"}>
+          <Link href={"/shop/female"}>
             <h1 className="text-2xl tracking-wide font-medium">Female Wears</h1>
             <small className="tracking-wider my-3">SHOP THESE</small>
           </Link>
@@ -25,7 +25,7 @@ export default function ShopThese() {
         }}
       >
         <div className="bg-black bg-opacity-50 h-full w-full text-white px-20 flex flex-col justify-center">
-          <Link href={"/"}>
+          <Link href={"/shop/unisex"}>
             <h1 className="text-2xl tracking-wide font-medium">Unisex Wears</h1>
             <small className="tracking-wider my-3">SHOP THESE</small>
           </Link>

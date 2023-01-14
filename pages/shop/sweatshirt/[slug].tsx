@@ -11,6 +11,8 @@ import { useDispatch } from "react-redux";
 import { addToBag } from "../../../redux/slices/bagSlice";
 import { useRouter } from "next/router";
 
+import { toast } from "react-toastify";
+
 export default function SweatshirtProductDetails(props: any) {
   const { slug } = props;
   const router = useRouter();
@@ -54,11 +56,15 @@ export default function SweatshirtProductDetails(props: any) {
 
   // ADD ITEM TO BAG
   const addItemToBag = () => {
-    if (size === "" || color === "") return;
+    if (size === "" || color === "") {
+      toast.error("Kindly select your Size and Color");
+      return;
+    }
     const newSweatshirt = { ...sweatshirt, price: sweatshirt.price * quantity };
     const product = { ...newSweatshirt, size, color, quantity };
     // send product as an action to redux store.. The Bag Slice
     dispatch(addToBag(product));
+    toast.success(`${sweatshirt.name} added to cart successfully`);
   };
 
   return (
