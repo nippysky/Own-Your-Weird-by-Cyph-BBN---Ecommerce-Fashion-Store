@@ -72,13 +72,6 @@ export default function Navbar() {
 
       {/* Nav Icons */}
       <nav className="flex gap-5 lg:gap-10 justify-end items-center">
-        <div
-          className="text-clayBrown flex lg:hidden cursor-pointer"
-          onClick={() => setMobileMenu(true)}
-        >
-          <HiMenuAlt3 size={25} />
-        </div>
-
         <Link href={"/login"}>
           <div className="flex items-end gap-2 text-[0.85rem] font-medium tracking-widest">
             <span>
@@ -111,6 +104,13 @@ export default function Navbar() {
               </div>
             </div>
           </Link>
+        </div>
+
+        <div
+          className="text-clayBrown flex lg:hidden cursor-pointer"
+          onClick={() => setMobileMenu(true)}
+        >
+          <HiMenuAlt3 size={25} />
         </div>
       </nav>
 
