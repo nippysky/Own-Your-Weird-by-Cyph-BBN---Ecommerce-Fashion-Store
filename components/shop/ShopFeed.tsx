@@ -3,13 +3,22 @@ import Link from "next/link";
 import React from "react";
 import urlFor from "../../utils/sanity-image";
 
+import { motion } from "framer-motion";
+
 export default function ShopFeedPage({ unisex, female, sweatshirt }: any) {
   const shopProduct = [...unisex, ...female, ...sweatshirt];
 
   return (
     <section className="w-full grid md:grid-cols-2 lg:grid-cols-3 gap-10 place-items-center place-content-center">
       {shopProduct.map((product: any) => (
-        <div key={product._id}>
+        <motion.div
+          key={product._id}
+          whileHover={{ scale: 1.1 }}
+          initial={{ y: 200, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ ease: "easeOut", duration: 1 }}
+        >
           <Link href={`/shop/${product.category}/${product.slug.current}`}>
             <>
               {/* image */}
@@ -33,7 +42,7 @@ export default function ShopFeedPage({ unisex, female, sweatshirt }: any) {
               </p>
             </>
           </Link>
-        </div>
+        </motion.div>
       ))}
     </section>
   );

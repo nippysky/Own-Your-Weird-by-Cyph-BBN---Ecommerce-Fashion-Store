@@ -12,6 +12,7 @@ import { addToBag } from "../../../redux/slices/bagSlice";
 import { useRouter } from "next/router";
 
 import { toast } from "react-toastify";
+import { motion } from "framer-motion";
 
 export default function SweatshirtProductDetails(props: any) {
   const { slug } = props;
@@ -105,7 +106,12 @@ export default function SweatshirtProductDetails(props: any) {
           {/* product details */}
           <section className="w-full flex-col lg:flex lg:flex-row gap-10 my-10">
             {/* image */}
-            <div className="lg:w-1/2 w-full flex justify-center lg:justify-start">
+            <motion.div
+              className="lg:w-1/2 w-full flex justify-center lg:justify-start"
+              initial={{ x: -200, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ ease: "easeOut", duration: 1 }}
+            >
               <div>
                 <Image
                   src={`${urlFor(sweatshirt.image)}`}
@@ -115,10 +121,15 @@ export default function SweatshirtProductDetails(props: any) {
                   priority
                 />
               </div>
-            </div>
+            </motion.div>
 
             {/* shopping details */}
-            <div className="lg:w-1/2 w-full mt-5 lg:mt-0">
+            <motion.div
+              className="lg:w-1/2 w-full mt-5 lg:mt-0"
+              initial={{ x: 200, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ ease: "easeOut", duration: 1 }}
+            >
               <div>
                 {/* title- Long name */}
                 <h1 className="font-medium tracking-wider capitalize text-2xl">
@@ -218,14 +229,20 @@ export default function SweatshirtProductDetails(props: any) {
                   Add To Bag
                 </button>
               </div>
-            </div>
+            </motion.div>
           </section>
 
           {/* MORE FROM THIS COLLECTION */}
           {moreLoading ? (
             <p>...loading</p>
           ) : (
-            <section className="my-32">
+            <motion.section
+              className="my-32"
+              initial={{ opacity: 0, y: 100 }}
+              transition={{ ease: "easeOut", duration: 1 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.1 }}
+            >
               <h1 className="font-semibold tracking-wide text-2xl text-center lg:text-left">
                 More From This Collection
               </h1>
@@ -268,7 +285,7 @@ export default function SweatshirtProductDetails(props: any) {
                   </button>
                 </Link>
               </div>
-            </section>
+            </motion.section>
           )}
         </section>
       )}

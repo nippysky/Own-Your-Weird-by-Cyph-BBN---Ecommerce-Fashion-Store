@@ -3,11 +3,20 @@ import Image from "next/image";
 import React from "react";
 import urlFor from "../../utils/sanity-image";
 
+import { motion } from "framer-motion";
+
 export default function SweatshirtFeed({ sweatshirt }: any) {
   return (
     <section className="w-full grid md:grid-cols-2 lg:grid-cols-3 gap-10 place-items-center">
       {sweatshirt.map((sweatshirt: any) => (
-        <div key={sweatshirt._id}>
+        <motion.div
+          key={sweatshirt._id}
+          whileHover={{ scale: 1.1 }}
+          initial={{ y: 200, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ ease: "easeOut", duration: 1 }}
+        >
           <Link href={`/shop/sweatshirt/${sweatshirt.slug.current}`}>
             {/* image */}
             <div className="">
@@ -29,7 +38,7 @@ export default function SweatshirtFeed({ sweatshirt }: any) {
               ₦{sweatshirt.price}
             </p>
           </Link>
-        </div>
+        </motion.div>
       ))}
     </section>
   );

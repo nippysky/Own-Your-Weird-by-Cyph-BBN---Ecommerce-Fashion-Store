@@ -1,10 +1,17 @@
 import Link from "next/link";
 import React from "react";
 
+import { motion } from "framer-motion";
+
 export default function ShopThese() {
   return (
     <section className="lg:flex lg:flex-row flex-col w-full gap-0">
-      <div
+      {/* Female wears */}
+      <motion.div
+        initial={{ y: 200, opacity: 0 }}
+        whileInView={{ y: 0, opacity: 1 }}
+        viewport={{ once: false, amount: 0.3 }}
+        transition={{ ease: "easeOut", duration: 1 }}
         className="bg-chocoBrown bg-cover bg-center w-full lg:w-1/2 h-[300px]"
         style={{
           backgroundImage: "url('/brand/short.jpeg')",
@@ -16,9 +23,14 @@ export default function ShopThese() {
             <small className="tracking-wider my-3">SHOP THESE</small>
           </Link>
         </div>
-      </div>
+      </motion.div>
 
-      <div
+      {/* Unisex Wears */}
+      <motion.div
+        initial={{ y: 200, opacity: 0 }}
+        whileInView={{ y: 0, opacity: 1 }}
+        viewport={{ once: false, amount: 0.3 }}
+        transition={{ ease: "easeOut", duration: 1 }}
         className="bg-chocoBrown bg-cover bg-center w-full lg:w-1/2 h-[300px]"
         style={{
           backgroundImage: "url('/brand/shirt.jpeg')",
@@ -30,7 +42,7 @@ export default function ShopThese() {
             <small className="tracking-wider my-3">SHOP THESE</small>
           </Link>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

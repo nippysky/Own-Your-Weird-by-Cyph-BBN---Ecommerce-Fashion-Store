@@ -8,8 +8,12 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { Provider } from "react-redux";
 import { store } from "../redux/store";
+import { persistStore } from "redux-persist";
+import { PersistGate } from "redux-persist/integration/react";
 
 const inter = Inter({ subsets: ["latin"], display: "swap" });
+
+let persistor = persistStore(store);
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -19,26 +23,28 @@ export default function App({ Component, pageProps }: AppProps) {
           color="#512116"
           startPosition={0.3}
           stopDelayMs={200}
-          height={3}
+          height={5}
           showOnShallow={true}
           options={{ easing: "ease", speed: 500 }}
         />
         <ScrollUp />
-        <main className={inter.className}>
-          <Component {...pageProps} />
-          <ToastContainer
-            position="top-right"
-            autoClose={3000}
-            hideProgressBar
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss={false}
-            draggable
-            pauseOnHover={false}
-            theme="colored"
-          />
-        </main>
+        <PersistGate persistor={persistor}>
+          <main className={inter.className}>
+            <Component {...pageProps} />
+            <ToastContainer
+              position="top-right"
+              autoClose={3000}
+              hideProgressBar
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss={false}
+              draggable
+              pauseOnHover={false}
+              theme="colored"
+            />
+          </main>
+        </PersistGate>
       </Provider>
     </>
   );

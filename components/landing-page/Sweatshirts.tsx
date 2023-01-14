@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Sweatshirts() {
   return (
@@ -24,25 +24,45 @@ export default function Sweatshirts() {
         </p>
       </Link>
 
-      <section className="w-full lg:flex lg:flex-row flex-col gap-10">
-        <div
-          className="hidden lg:flex bg-chocoBrown w-[430px] h-[530px] bg-cover"
-          style={{
-            backgroundImage: "url('/brand/ss1.jpeg')",
-          }}
-        />
-        <div
-          className="hidden lg:flex bg-chocoBrown w-[430px] h-[530px] bg-cover"
+      <section className="w-full hidden lg:flex lg:flex-row flex-col gap-10">
+        <AnimatePresence>
+          <motion.div
+            initial={{ opacity: 0, x: -200 }}
+            transition={{ ease: "easeOut", duration: 1 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: false, amount: 0.3 }}
+            exit={{ opacity: 0, x: 200 }}
+            className="lg:flex bg-chocoBrown w-[430px] h-[530px] bg-cover"
+            style={{
+              backgroundImage: "url('/brand/ss1.jpeg')",
+            }}
+          />
+        </AnimatePresence>
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.5 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ ease: "easeOut", duration: 1 }}
+          className="lg:flex bg-chocoBrown w-[430px] h-[530px] bg-cover"
           style={{
             backgroundImage: "url('/brand/ss2.jpeg')",
           }}
         />
-        <div
-          className="hidden lg:flex bg-chocoBrown w-[430px] h-[530px] bg-cover"
-          style={{
-            backgroundImage: "url('/brand/ss3.jpeg')",
-          }}
-        />
+
+        <AnimatePresence>
+          <motion.div
+            initial={{ opacity: 0, x: 200 }}
+            transition={{ ease: "easeOut", duration: 1 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: false, amount: 0.3 }}
+            exit={{ opacity: 0, x: 200 }}
+            className="lg:flex bg-chocoBrown w-[430px] h-[530px] bg-cover"
+            style={{
+              backgroundImage: "url('/brand/ss3.jpeg')",
+            }}
+          />
+        </AnimatePresence>
       </section>
     </section>
   );

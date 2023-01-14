@@ -11,8 +11,8 @@ import {
 } from "../../redux/slices/bagSlice";
 import urlFor from "../../utils/sanity-image";
 import { IoClose } from "react-icons/io5";
-
 import { useDispatch } from "react-redux";
+import { motion } from "framer-motion";
 
 export default function Bag() {
   const items = useSelector(selectItems);
@@ -50,7 +50,7 @@ export default function Bag() {
 
           <div className="w-1/2 flex justify-end">
             {items.length > 0 ? (
-              <Link href={"/"}>
+              <Link href={"/shop/checkout"}>
                 <button className="bg-clayBrown py-3 px-14 text-center font-semibold text-white">
                   Proceed To Pay
                 </button>
@@ -67,7 +67,11 @@ export default function Bag() {
 
         {/* Map Cart Items From Redux Global Store */}
         {items.map((item: any, index: any) => (
-          <section
+          <motion.section
+            initial={{ x: 200, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ ease: "easeOut", duration: 1 }}
             key={item._id}
             className={`w-full ${
               index % 2 === 0 ? "bg-clayBrown" : "bg-chocoBrown"
@@ -126,7 +130,7 @@ export default function Bag() {
                 </div>
               </div>
             </div>
-          </section>
+          </motion.section>
         ))}
 
         {/* Other Details */}
