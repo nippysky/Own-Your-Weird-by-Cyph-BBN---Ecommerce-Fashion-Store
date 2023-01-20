@@ -38,9 +38,10 @@ export default function Bag() {
       </header>
 
       <section className="w-full px-5 lg:px-20 my-5">
-        {/* Button */}
-        <div className="w-full flex justify-between items-center">
-          <div className="w-1/2 flex justify-start">
+        {/*Text & Button */}
+        <div className="w-full flex flex-col md:flex-row justify-between items-center">
+          {/* text */}
+          <div className="lg:w-1/2 w-full flex lg:justify-start">
             <h1 className="font-medium text-clayBrown text-xl">
               {items.length === 0
                 ? "Your Bag Is Empty"
@@ -48,7 +49,8 @@ export default function Bag() {
             </h1>
           </div>
 
-          <div className="w-1/2 flex justify-end">
+          {/* button */}
+          <div className="lg:w-1/2 w-full flex md:justify-end mt-10 md:mt-0">
             {items.length > 0 ? (
               <Link href={"/shop/checkout"}>
                 <button className="bg-clayBrown py-3 px-14 text-center font-semibold text-white">
@@ -75,10 +77,10 @@ export default function Bag() {
             key={item._id}
             className={`w-full ${
               index % 2 === 0 ? "bg-clayBrown" : "bg-chocoBrown"
-            } p-10 my-10 flex justify-between items-start`}
+            } p-10 my-10 flex flex-col-reverse lg:flex-row justify-between items-start`}
           >
             {/* IMAGE, QUANTITY, COLOR, SIZE */}
-            <div className="flex gap-5 w-1/2 justify-start">
+            <div className="flex gap-5 lg:w-1/2 w-full justify-start">
               <Image
                 src={`${urlFor(item.image)}`}
                 alt={item.name}
@@ -108,7 +110,7 @@ export default function Bag() {
             </div>
 
             {/* DELETE-BUTTON, NAME, PRICE */}
-            <div className="w-1/2 text-white flex justify-end">
+            <div className="lg:w-1/2 w-full text-white flex justify-end mb-10 lg:mb-0">
               <div className="flex flex-col gap-20 items-end">
                 {/* delete button */}
                 <div
@@ -150,9 +152,11 @@ export default function Bag() {
               </p>
             </div>
 
-            <button className="my-10 bg-clayBrown text-center py-3 w-full text-white font-semibold">
-              Proceed To Pay
-            </button>
+            <Link href={"/shop/checkout"}>
+              <button className="my-10 bg-clayBrown text-center py-3 w-full text-white font-semibold">
+                Proceed To Pay
+              </button>
+            </Link>
           </section>
         )}
       </section>

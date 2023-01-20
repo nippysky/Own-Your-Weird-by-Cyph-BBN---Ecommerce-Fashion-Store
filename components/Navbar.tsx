@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { HiMenuAlt3 } from "react-icons/hi";
@@ -12,6 +13,7 @@ import { useSelector } from "react-redux";
 import { selectItems } from "../redux/slices/bagSlice";
 
 export default function Navbar() {
+  const { data: session } = useSession();
   const { asPath } = useRouter();
   const items = useSelector(selectItems);
   const [mobileMenu, setMobileMenu] = useState<boolean>(false);
@@ -33,7 +35,7 @@ export default function Navbar() {
 
       {/* Menu Links */}
       <nav className="hidden lg:flex gap-10 justify-center items-center">
-        <Link href={"/shop/unisex"}>
+        <a href={"/shop/unisex"}>
           <span
             className={`font-medium tracking-widest text-[0.85rem] ${
               asPath === "/shop/unisex"
@@ -43,9 +45,9 @@ export default function Navbar() {
           >
             UNISEX
           </span>
-        </Link>
+        </a>
 
-        <Link href={"/shop/female"}>
+        <a href={"/shop/female"}>
           <span
             className={`font-medium tracking-widest text-[0.85rem] ${
               asPath === "/shop/female"
@@ -55,9 +57,9 @@ export default function Navbar() {
           >
             FEMALE
           </span>
-        </Link>
+        </a>
 
-        <Link href={"/shop/sweatshirt"}>
+        <a href={"/shop/sweatshirt"}>
           <span
             className={`font-medium tracking-widest text-[0.85rem] ${
               asPath === "/shop/sweatshirt"
@@ -67,19 +69,30 @@ export default function Navbar() {
           >
             SWEATSHIRT
           </span>
-        </Link>
+        </a>
       </nav>
 
       {/* Nav Icons */}
       <nav className="flex gap-5 lg:gap-10 justify-end items-center">
-        <Link href={"/login"}>
-          <div className="flex items-end gap-2 text-[0.85rem] font-medium tracking-widest">
-            <span>
-              <RxPerson size={22} />
-            </span>
-            <span className=" hidden lg:inline">LOGIN</span>
-          </div>
-        </Link>
+        {session?.user ? (
+          <a href={"/login"}>
+            <div className="flex items-end gap-2 text-[0.85rem] font-medium tracking-widest">
+              <span>
+                <RxPerson size={22} />
+              </span>
+              <span className="hidden lg:inline uppercase">My Profile</span>
+            </div>
+          </a>
+        ) : (
+          <a href={"/login"}>
+            <div className="flex items-end gap-2 text-[0.85rem] font-medium tracking-widest">
+              <span>
+                <RxPerson size={22} />
+              </span>
+              <span className="hidden lg:inline uppercase">Login</span>
+            </div>
+          </a>
+        )}
 
         <div
           className={` ${
@@ -88,7 +101,7 @@ export default function Navbar() {
               : "null"
           }`}
         >
-          <Link href={"/shop/bag"}>
+          <a href={"/shop/bag"}>
             <div className={`flex relative`}>
               {/* bag */}
               <HiOutlineShoppingBag size={25} />
@@ -103,7 +116,7 @@ export default function Navbar() {
                 </small>
               </div>
             </div>
-          </Link>
+          </a>
         </div>
 
         <div
@@ -116,7 +129,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {mobileMenu && (
-        <section className="w-[50%] h-screen fixed top-0 left-0 bg-clayBrown pt-5 px-5">
+        <section className="w-[50%] h-screen fixed top-0 left-0 bg-clayBrown pt-5 px-5 z-50 duration-500">
           <div className="text-white flex justify-end ">
             <div
               className="cursor-pointer"

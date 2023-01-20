@@ -1,19 +1,14 @@
-import React, { FormEvent } from "react";
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { BsArrowLeft } from "react-icons/bs";
 import Head from "next/head";
 
-export default function StepOne({ formData, setFormData, setScreen }: any) {
-  // Funtion to handle form when it is submitted
-  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-  }
-
+export default function StepOne({ setScreen }: any) {
   return (
     <>
       <Head>
-        <title>Step One - Register</title>
+        <title>Step One - Read Register Terms</title>
         <meta
           name="description"
           content="Own Your Weird is an urban street clothing and lifestyle brand which embodies the weird in everyone."
@@ -62,85 +57,33 @@ export default function StepOne({ formData, setFormData, setScreen }: any) {
         </div>
 
         {/* RIGHT */}
-        <div className="lg:w-1/2 w-full lg:h-screen bg-white px-20 py-10 relative">
-          <div className="mt-10">
-            <form onClick={handleSubmit}>
-              {/* email */}
-              <div className="">
-                <label
-                  className="font-semibold relative bottom-5 tracking-wide"
-                  htmlFor="email"
-                >
-                  Email Address
-                </label>
-                <input
-                  onChange={(event) =>
-                    setFormData({ ...formData, email: event.target.value })
-                  }
-                  value={formData.email}
-                  required
-                  className="w-full h-14 p-5 bg-formBG border-none focus:ring-0"
-                  type="email"
-                  id="email"
-                  name="email"
-                  placeholder="Enter Your Email Address"
-                />
-              </div>
+        <div className="lg:w-1/2 w-full lg:h-screen lg:flex lg:flex-col lg:justify-between bg-white px-20 py-10">
+          {/* terms and agreement */}
+          <div>
+            <p className="my-10 tracking-wider text-chocoBrown font-normal text-justify">
+              Kindly note that data collected from the registration form is
+              solely used for the purpose of identification for owners of
+              product that will be ordered on this web store.
+            </p>
 
-              {/* firstname */}
-              <div className="mt-14">
-                <label
-                  className="font-semibold relative bottom-5 tracking-wide"
-                  htmlFor="fName"
-                >
-                  First Name
-                </label>
-                <input
-                  onChange={(event) =>
-                    setFormData({ ...formData, firstName: event.target.value })
-                  }
-                  value={formData.firstName}
-                  required
-                  className="w-full h-14 p-5 bg-formBG border-none focus:ring-0"
-                  type="text"
-                  id="fName"
-                  name="fName"
-                  placeholder="Enter Your First Name"
-                />
-              </div>
+            <p className="my-10 tracking-wider text-chocoBrown font-normal text-justify">
+              Cyph will only occasionally send you emails on orders or new
+              products available for sale.
+            </p>
 
-              {/* lastName */}
-              <div className="mt-14">
-                <label
-                  className="font-semibold relative bottom-5 tracking-wide"
-                  htmlFor="lName"
-                >
-                  Last Name
-                </label>
-                <input
-                  onChange={(event) =>
-                    setFormData({ ...formData, lastName: event.target.value })
-                  }
-                  value={formData.lastName}
-                  required
-                  className="w-full h-14 p-5 bg-formBG border-none focus:ring-0"
-                  type="text"
-                  id="lName"
-                  name="lName"
-                  placeholder="Enter Your Last Name"
-                />
-              </div>
+            <p className="my-10 tracking-wider text-chocoBrown font-normal text-justify">
+              By proceeding, you agree to the aformentioned terms.
+            </p>
+          </div>
 
-              {/* continue button */}
-              <div className="mt-20 flex justify-end">
-                <button
-                  className="w-[35%] bg-clayBrown text-white py-4 tracking-wide text-center"
-                  onClick={() => setScreen(1)}
-                >
-                  Continue
-                </button>
-              </div>
-            </form>
+          {/* continue button */}
+          <div className="flex justify-end">
+            <button
+              className="w-[35%] bg-clayBrown text-white py-4 tracking-wide text-center"
+              onClick={() => setScreen(1)}
+            >
+              Continue
+            </button>
           </div>
         </div>
       </section>

@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 export default function RegisterionSuccessfull() {
+  const router = useRouter();
+
+  useEffect(() => {
+    setTimeout(() => {
+      router.push("/login");
+    }, 5000);
+  }, []);
+
   return (
     <>
       <Head>
@@ -26,7 +35,7 @@ export default function RegisterionSuccessfull() {
           <div>
             <p className="tracking-widest">ACCOUNT CREATION SUCCESSFULL</p>
             <h1 className="text-[3rem] my-5 font-thin animate-pulse">
-              Owning Your Weird...
+              Owning Your Weird. Please Wait...
             </h1>
           </div>
         </div>

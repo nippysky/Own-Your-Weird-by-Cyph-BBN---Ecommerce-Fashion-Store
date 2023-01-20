@@ -1,8 +1,17 @@
+import React, { useEffect } from "react";
 import Head from "next/head";
 import Image from "next/image";
-import React from "react";
+import { useRouter } from "next/router";
 
 export default function OrderSuccessfull() {
+  const router = useRouter();
+
+  useEffect(() => {
+    setTimeout(() => {
+      router.push("/");
+    }, 5000);
+  }, []);
+
   return (
     <>
       <Head>

@@ -54,6 +54,6 @@ export async function getStaticProps() {
     props: {
       unisex,
     },
-    revalidate: 360,
+    revalidate: 3600,
   };
 }

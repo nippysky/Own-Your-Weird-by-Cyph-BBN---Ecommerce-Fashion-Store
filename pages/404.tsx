@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { BsArrowLeft } from "react-icons/bs";
 
-export default function Error() {
+export default function Page404() {
   return (
     <>
       <Head>

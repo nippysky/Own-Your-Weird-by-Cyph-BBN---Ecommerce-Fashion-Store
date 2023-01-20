@@ -12,7 +12,7 @@ export default function ShopThese() {
         whileInView={{ y: 0, opacity: 1 }}
         viewport={{ once: false, amount: 0.3 }}
         transition={{ ease: "easeOut", duration: 1 }}
-        className="bg-chocoBrown bg-cover bg-center w-full lg:w-1/2 h-[300px]"
+        className="bg-clayBrown bg-cover bg-center w-full lg:w-1/2 h-[300px]"
         style={{
           backgroundImage: "url('/brand/short.jpeg')",
         }}

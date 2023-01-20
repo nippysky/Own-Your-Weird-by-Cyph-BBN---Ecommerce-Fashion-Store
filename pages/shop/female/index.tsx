@@ -54,6 +54,6 @@ export async function getStaticProps() {
     props: {
       female,
     },
-    revalidate: 360,
+    revalidate: 3600,
   };
 }
