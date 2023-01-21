@@ -37,7 +37,7 @@ export default function App({
             <main className={inter.className}>
               <Component {...pageProps} />
               <ToastContainer
-                position="bottom-left"
+                position="bottom-right"
                 limit={1}
                 autoClose={3000}
                 hideProgressBar

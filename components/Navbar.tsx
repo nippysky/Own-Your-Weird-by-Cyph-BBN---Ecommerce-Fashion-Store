@@ -75,7 +75,7 @@ export default function Navbar() {
       {/* Nav Icons */}
       <nav className="flex gap-5 lg:gap-10 justify-end items-center">
         {session?.user ? (
-          <a href={"/login"}>
+          <a href={"/profile"}>
             <div className="flex items-end gap-2 text-[0.85rem] font-medium tracking-widest">
               <span>
                 <RxPerson size={22} />

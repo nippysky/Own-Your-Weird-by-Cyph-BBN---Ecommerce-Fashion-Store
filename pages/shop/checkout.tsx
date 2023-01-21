@@ -41,7 +41,7 @@ export default function Checkout() {
         // handle error
         console.log(error);
       });
-  }, []);
+  }, [session]);
 
   return (
     <>
@@ -64,9 +64,9 @@ export default function Checkout() {
           <Link href={"/shop/bag"}>
             <span className="font-semibold underline">Bag</span>
           </Link>
-
           <span> / Checkout</span>
         </div>
+
         {/* ITEMS AND USER DETAILS */}
         <div className="w-full flex flex-col lg:flex-row gap-10">
           {/* items */}
