@@ -40,6 +40,6 @@ export default async function handler(
     };
     EditProfile();
 
-    res.send({ message: "Seeded Succesfully" });
+    return res.send({ message: "Seeded Succesfully" });
   }
 }

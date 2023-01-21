@@ -38,6 +38,6 @@ export default async function handler(
     };
     ChangePassword();
 
-    res.send({ message: "Seeded Succesfully" });
+    return res.send({ message: "Seeded Succesfully" });
   }
 }

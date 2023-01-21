@@ -49,6 +49,6 @@ export default async function handler(
       password: await hash(password, 12),
     });
 
-    res.send({ message: "Seeded Succesfully" });
+    return res.send({ message: "Seeded Succesfully" });
   }
 }
