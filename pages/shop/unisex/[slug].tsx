@@ -253,34 +253,31 @@ export default function UnisexProductDetails(props: any) {
               </h1>
 
               <section className="w-full grid md:grid-cols-2 lg:grid-cols-3 gap-10 place-items-center place-content-center mt-10">
-                {moreUnisex
-                  .sort(() => 0.5 - Math.random())
-                  .slice(0, 3)
-                  .map((outfit: any) => (
-                    <div key={outfit._id}>
-                      <a href={`/shop/unisex/${outfit.slug.current}`}>
-                        {/* image */}
-                        <div className="">
-                          <Image
-                            src={`${urlFor(outfit.image)}`}
-                            alt={outfit.name}
-                            width={360}
-                            height={360}
-                            priority
-                          />
-                        </div>
+                {moreUnisex.slice(0, 3).map((outfit: any) => (
+                  <div key={outfit._id}>
+                    <a href={`/shop/unisex/${outfit.slug.current}`}>
+                      {/* image */}
+                      <div className="">
+                        <Image
+                          src={`${urlFor(outfit.image)}`}
+                          alt={outfit.name}
+                          width={360}
+                          height={360}
+                          priority
+                        />
+                      </div>
 
-                        {/* name */}
-                        <p className="tracking-widest uppercase font-medium my-2">
-                          {outfit.name}
-                        </p>
-                        {/* price */}
-                        <p className="text-chocoBrown font-bold text-xl my-2">
-                          ₦{outfit.price}
-                        </p>
-                      </a>
-                    </div>
-                  ))}
+                      {/* name */}
+                      <p className="tracking-widest uppercase font-medium my-2">
+                        {outfit.name}
+                      </p>
+                      {/* price */}
+                      <p className="text-chocoBrown font-bold text-xl my-2">
+                        ₦{outfit.price}
+                      </p>
+                    </a>
+                  </div>
+                ))}
               </section>
 
               <div className="w-full flex justify-center items-center mt-20">
