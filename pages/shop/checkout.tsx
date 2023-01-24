@@ -19,7 +19,7 @@ import { useDispatch } from "react-redux";
 
 export default function Checkout() {
   const { data: session } = useSession();
-  const email = session?.user?.email;
+  const userId = session?.user?.id;
 
   const router = useRouter();
 
@@ -193,7 +193,7 @@ export default function Checkout() {
             </div>
 
             {/* Button */}
-            <Link href={"/profile"}>
+            <Link href={`/profile/${userId}`}>
               <button className="w-full bg-white text-clayBrown font-medium tracking-wide py-3">
                 Edit Delivery Details
               </button>
