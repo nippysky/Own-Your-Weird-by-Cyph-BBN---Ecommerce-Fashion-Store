@@ -10,7 +10,7 @@ export default function OrderSuccessfull() {
     setTimeout(() => {
       router.replace("/profile/orders");
     }, 3000);
-  }, []);
+  }, [router]);
 
   return (
     <>

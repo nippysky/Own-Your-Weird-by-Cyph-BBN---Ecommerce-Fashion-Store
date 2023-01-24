@@ -10,7 +10,7 @@ export default function RegisterionSuccessfull() {
     setTimeout(() => {
       router.replace("/login");
     }, 5000);
-  }, []);
+  }, [router]);
 
   return (
     <>

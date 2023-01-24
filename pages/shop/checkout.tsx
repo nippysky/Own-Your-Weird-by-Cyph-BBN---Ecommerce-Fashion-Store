@@ -64,7 +64,7 @@ export default function Checkout() {
         // handle error
         console.log(error);
       });
-  }, []);
+  }, [email]);
 
   // HANDLE ON SUCCESS EVENT
   const onSuccess = (reference) => {

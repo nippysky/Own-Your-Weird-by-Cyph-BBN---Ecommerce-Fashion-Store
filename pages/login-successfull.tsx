@@ -10,7 +10,7 @@ export default function LoginSuccessful() {
     setTimeout(() => {
       router.replace("/shop");
     }, 3000);
-  }, []);
+  }, [router]);
 
   return (
     <>

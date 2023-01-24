@@ -50,7 +50,7 @@ export default function SweatshirtProductDetails(props: any) {
       });
     };
     fetchData();
-  }, []);
+  }, [moreState, slug, state]);
 
   // Redux Dispatch
   const dispatch = useDispatch();

@@ -50,7 +50,7 @@ export default function UnisexProductDetails(props: any) {
       });
     };
     fetchData();
-  }, []);
+  }, [moreState, slug, state]);
 
   // Redux Dispatch
   const dispatch = useDispatch();
