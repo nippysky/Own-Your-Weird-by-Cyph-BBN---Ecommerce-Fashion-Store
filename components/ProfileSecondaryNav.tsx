@@ -45,7 +45,7 @@ export default function ProfileSecondaryNav() {
 
         {/* signout */}
         <div
-          onClick={() => signOut()}
+          onClick={() => signOut({ callbackUrl: "/" })}
           className={`lg:w-1/3 w-full text-center font-medium tracking-widest text-[0.85rem] bg-red-600 py-3 text-white cursor-pointer mt-10 lg:mt-0`}
         >
           SIGN OUT

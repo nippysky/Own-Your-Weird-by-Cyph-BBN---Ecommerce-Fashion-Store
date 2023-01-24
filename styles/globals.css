@@ -29,3 +29,8 @@ a {
 .spinner {
   display: none !important;
 }
+
+.Toastify__toast-body {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.85rem;
+}
