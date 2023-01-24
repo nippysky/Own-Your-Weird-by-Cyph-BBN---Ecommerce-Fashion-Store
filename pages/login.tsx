@@ -18,7 +18,7 @@ export default function Login() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <section className="w-full lg:h-screen flex-col lg:flex lg:flex-row">
+      <section className="w-full lg:h-screen flex-col-reverse lg:flex lg:flex-row">
         {/* LEFT */}
         <div className="lg:w-1/2 w-full lg:h-screen bg-chocoBrown pt-5 pb-20 px-10 flex flex-col justify-between">
           {/* go back home */}

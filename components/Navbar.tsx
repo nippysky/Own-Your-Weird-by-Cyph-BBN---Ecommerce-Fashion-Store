@@ -14,6 +14,8 @@ import { selectItems } from "../redux/slices/bagSlice";
 
 export default function Navbar() {
   const { data: session } = useSession();
+  // @ts-ignore
+  const userId = session?.user?.id;
   const { asPath } = useRouter();
   const items = useSelector(selectItems);
   const [mobileMenu, setMobileMenu] = useState<boolean>(false);
@@ -75,7 +77,7 @@ export default function Navbar() {
       {/* Nav Icons */}
       <nav className="flex gap-5 lg:gap-10 justify-end items-center">
         {session?.user ? (
-          <a href={"/profile"}>
+          <a href={`/profile/${userId}`}>
             <div className="flex items-end gap-2 text-[0.85rem] font-medium tracking-widest">
               <span>
                 <RxPerson size={22} />

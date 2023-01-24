@@ -63,6 +63,7 @@ export default function UnisexProductDetails(props: any) {
     }
     const newUnisex = { ...unisex, price: unisex.price * quantity };
     const product = { ...newUnisex, size, color, quantity };
+
     // send product as an action to redux store.. The Bag Slice
     dispatch(addToBag(product));
     toast.success(`${unisex.name} added to cart successfully`);

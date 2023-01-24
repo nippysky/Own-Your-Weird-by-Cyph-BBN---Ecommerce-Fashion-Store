@@ -9,7 +9,7 @@ export default async function handler(
   await db.connect();
 
   if (req.method === "GET") {
-    User.find({}, (error: any, data: any[]) => {
+    User.find({}, (error: any, data: object[]) => {
       if (error) {
         return res.status(404).json({ status: "Failure", data: error });
       } else {

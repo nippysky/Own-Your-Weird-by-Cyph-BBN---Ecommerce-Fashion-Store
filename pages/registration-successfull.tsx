@@ -8,7 +8,7 @@ export default function RegisterionSuccessfull() {
 
   useEffect(() => {
     setTimeout(() => {
-      router.push("/login");
+      router.replace("/login");
     }, 5000);
   }, []);
 
@@ -21,12 +21,12 @@ export default function RegisterionSuccessfull() {
       </Head>
 
       <section className="w-full h-screen bg-clayBrown px-20 pt-2 pb-10 flex flex-col justify-between">
-        <div className="flex justify-end">
+        <div className="flex lg:justify-end justify-center">
           <Image
             src={"/brand/CyphFootLogo.svg"}
             alt={"Cyph's Logo"}
-            height={250}
-            width={250}
+            height={200}
+            width={200}
             priority
           />
         </div>
@@ -34,7 +34,7 @@ export default function RegisterionSuccessfull() {
         <div className="flex justify-start text-white">
           <div>
             <p className="tracking-widest">ACCOUNT CREATION SUCCESSFULL</p>
-            <h1 className="text-[3rem] my-5 font-thin animate-pulse">
+            <h1 className="lg:text-[3rem] text-2xl text-center lg:text-left my-5 font-thin animate-pulse">
               Owning Your Weird. Please Wait...
             </h1>
           </div>

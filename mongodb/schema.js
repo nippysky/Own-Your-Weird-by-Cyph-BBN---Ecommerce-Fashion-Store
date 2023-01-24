@@ -9,10 +9,8 @@ const userSchema = new Schema({
   password: { type: String },
   orders: [
     {
-      name: { type: String },
-      quantity: { type: Number },
-      image: { type: String },
-      price: { type: Number },
+      date: { type: String },
+      order: [],
     },
   ],
 });

@@ -5,12 +5,10 @@ import urlFor from "../../utils/sanity-image";
 
 import { motion } from "framer-motion";
 
-export default function ShopFeedPage({ unisex, female, sweatshirt }: any) {
-  const shopProduct = [...unisex, ...female, ...sweatshirt];
-
+export default function ShopFeedPage({ shopItems }: { shopItems: object[] }) {
   return (
     <section className="w-full grid md:grid-cols-2 lg:grid-cols-3 gap-10 place-items-center place-content-center">
-      {shopProduct.map((product: any) => (
+      {shopItems.map((product: any) => (
         <motion.div
           key={product._id}
           whileHover={{ scale: 1.1 }}

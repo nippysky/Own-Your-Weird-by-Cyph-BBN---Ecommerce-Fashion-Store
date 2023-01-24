@@ -29,10 +29,13 @@ export const bagSlice = createSlice({
       }
       state.items = newBag;
     },
+    emptyCart: (state) => {
+      state.items = [];
+    },
   },
 });
 
-export const { addToBag, removeFromBag } = bagSlice.actions;
+export const { addToBag, removeFromBag, emptyCart } = bagSlice.actions;
 
 // Selectors- This is how we pull information from the global store slice
 export const selectItems = (state) => state.bag.items;

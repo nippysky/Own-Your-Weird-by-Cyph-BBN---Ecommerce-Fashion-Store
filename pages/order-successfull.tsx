@@ -8,8 +8,8 @@ export default function OrderSuccessfull() {
 
   useEffect(() => {
     setTimeout(() => {
-      router.push("/");
-    }, 5000);
+      router.replace("/profile/orders");
+    }, 3000);
   }, []);
 
   return (
@@ -21,12 +21,12 @@ export default function OrderSuccessfull() {
       </Head>
 
       <section className="w-full h-screen bg-chocoBrown px-20 pt-2 pb-10 flex flex-col justify-between">
-        <div className="flex justify-end">
+        <div className="flex lg:justify-end justify-center">
           <Image
             src={"/brand/CyphFootLogo.svg"}
             alt={"Cyph's Logo"}
-            height={250}
-            width={250}
+            height={200}
+            width={200}
             priority
           />
         </div>
@@ -34,7 +34,7 @@ export default function OrderSuccessfull() {
         <div className="flex justify-start text-white">
           <div>
             <p className="tracking-widest">PAYMENT SUCCESSFULL</p>
-            <h1 className="text-[3rem] my-5 font-thin animate-pulse">
+            <h1 className="lg:text-[3rem] text-2xl text-center lg:text-left my-5 font-thin animate-pulse">
               Order On It's Way...
             </h1>
           </div>

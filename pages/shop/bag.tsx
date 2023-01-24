@@ -13,8 +13,10 @@ import urlFor from "../../utils/sanity-image";
 import { IoClose } from "react-icons/io5";
 import { useDispatch } from "react-redux";
 import { motion } from "framer-motion";
+import { useSession } from "next-auth/react";
 
 export default function Bag() {
+  const { data: session } = useSession();
   const items = useSelector(selectItems);
   const total = useSelector(selectTotal);
 
@@ -51,19 +53,11 @@ export default function Bag() {
 
           {/* button */}
           <div className="lg:w-1/2 w-full flex md:justify-end mt-10 md:mt-0">
-            {items.length > 0 ? (
-              <Link href={"/shop/checkout"}>
-                <button className="bg-clayBrown py-3 px-14 text-center font-semibold text-white">
-                  Proceed To Pay
-                </button>
-              </Link>
-            ) : (
-              <Link href={"/shop"}>
-                <button className="bg-clayBrown py-3 px-14 text-center font-semibold text-white">
-                  Continue Shopping
-                </button>
-              </Link>
-            )}
+            <Link href={"/shop/"}>
+              <button className="bg-clayBrown py-3 px-14 text-center font-semibold text-white">
+                Continue Shopping
+              </button>
+            </Link>
           </div>
         </div>
 
@@ -151,12 +145,19 @@ export default function Bag() {
                 ₦{total}
               </p>
             </div>
-
-            <Link href={"/shop/checkout"}>
-              <button className="my-10 bg-clayBrown text-center py-3 w-full text-white font-semibold">
-                Proceed To Pay
-              </button>
-            </Link>
+            {session ? (
+              <Link href={"/shop/checkout"}>
+                <button className="my-10 bg-clayBrown text-center py-3 w-full text-white font-semibold">
+                  Proceed To Pay
+                </button>
+              </Link>
+            ) : (
+              <Link href={"/login"}>
+                <button className="my-10 bg-clayBrown text-center py-3 w-full text-white font-semibold">
+                  Login To Make Payment
+                </button>
+              </Link>
+            )}
           </section>
         )}
       </section>

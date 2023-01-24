@@ -5,15 +5,7 @@ import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
 import ShopFeed from "../../components/shop/ShopFeed";
 
-export default function Shop({
-  unisex,
-  female,
-  sweatshirt,
-}: {
-  unisex: object[];
-  female: object[];
-  sweatshirt: object[];
-}) {
+export default function Shop({ shopItems }: { shopItems: object[] }) {
   return (
     <>
       <Head>
@@ -31,7 +23,7 @@ export default function Shop({
       </header>
 
       <section className="w-full px-5 lg:px-32 py-10">
-        <ShopFeed unisex={unisex} female={female} sweatshirt={sweatshirt} />
+        <ShopFeed shopItems={shopItems} />
       </section>
 
       <footer>
@@ -53,7 +45,11 @@ export async function getStaticProps() {
   const female = await client.fetch(`*[_type == "female"]`);
   const sweatshirt = await client.fetch(`*[_type == "sweatshirt"]`);
 
-  if (!unisex) {
+  const shopItems = [...unisex, ...female, ...sweatshirt].sort(
+    () => Math.random() - 0.5
+  );
+
+  if (!unisex || !female || !sweatshirt) {
     return {
       notfound: true,
     };
@@ -61,9 +57,7 @@ export async function getStaticProps() {
 
   return {
     props: {
-      unisex,
-      female,
-      sweatshirt,
+      shopItems,
     },
     revalidate: 360,
   };

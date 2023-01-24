@@ -28,8 +28,6 @@ export default NextAuth({
             // Get all the needed information
             id: user._id,
             email: user.email,
-            image: "",
-            name: user.fisrtName,
           };
         }
         throw new Error("Invalid Email or Password");
@@ -38,15 +36,13 @@ export default NextAuth({
   ],
   callbacks: {
     async jwt({ token, user }) {
-      if (user?._id) token.id = user._id;
-      if (user?.firstName) token.name = user.firstName;
+      if (user?.id) token.id = user.id;
       if (user?.email) token.email = user.email;
       return token;
     },
 
     async session({ session, token }) {
       if (token?.id) session.user.id = token.id;
-      if (token?.name) session.user.name = token.name;
       if (token?.email) session.user.email = token.email;
       return session;
     },

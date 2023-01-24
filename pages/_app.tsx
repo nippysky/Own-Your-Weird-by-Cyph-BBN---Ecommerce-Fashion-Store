@@ -10,7 +10,8 @@ import { Provider } from "react-redux";
 import { store } from "../redux/store";
 import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
-import { SessionProvider } from "next-auth/react";
+import { SessionProvider, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 const inter = Inter({ subsets: ["latin"], display: "swap" });
 
@@ -34,25 +35,67 @@ export default function App({
           />
           <ScrollUp />
           <PersistGate persistor={persistor}>
-            <main className={inter.className}>
-              <Component {...pageProps} />
-              <ToastContainer
-                position="bottom-right"
-                limit={1}
-                autoClose={3000}
-                hideProgressBar
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss={false}
-                draggable
-                pauseOnHover={false}
-                theme="colored"
-              />
-            </main>
+            {/* @ts-ignore */}
+            {Component.auth ? (
+              <Auth>
+                <main className={inter.className}>
+                  <Component {...pageProps} />
+                  <ToastContainer
+                    position="bottom-right"
+                    limit={1}
+                    autoClose={2000}
+                    hideProgressBar
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss={false}
+                    draggable
+                    pauseOnHover={false}
+                    theme="colored"
+                  />
+                </main>
+              </Auth>
+            ) : (
+              <main className={inter.className}>
+                <Component {...pageProps} />
+                <ToastContainer
+                  position="bottom-right"
+                  limit={1}
+                  autoClose={2000}
+                  hideProgressBar
+                  newestOnTop={false}
+                  closeOnClick
+                  rtl={false}
+                  pauseOnFocusLoss={false}
+                  draggable
+                  pauseOnHover={false}
+                  theme="colored"
+                />
+              </main>
+            )}
           </PersistGate>
         </Provider>
       </SessionProvider>
     </>
   );
+}
+
+function Auth({ children }: any) {
+  const router = useRouter();
+  const { status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      router.push("/unauthorized?message=Login Required");
+    },
+  });
+
+  if (status === "loading") {
+    return (
+      <div className="w-full h-screen flex justify-center items-center">
+        Loading...
+      </div>
+    );
+  }
+
+  return children;
 }

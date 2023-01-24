@@ -3,23 +3,46 @@ import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import Navbar from "../../components/Navbar";
 import axios from "axios";
+import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { useSelector } from "react-redux";
-import { requireAuthentication } from "../../utils/requireAuthentication";
-import { selectItems, selectTotal } from "../../redux/slices/bagSlice";
-import Link from "next/link";
+import {
+  emptyCart,
+  selectItems,
+  selectTotal,
+} from "../../redux/slices/bagSlice";
+
+import { usePaystackPayment } from "react-paystack";
+import { useRouter } from "next/router";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
 
 export default function Checkout() {
   const { data: session } = useSession();
   const email = session?.user?.email;
 
+  const router = useRouter();
+
+  // Redux Dispatch
+  const dispatch = useDispatch();
+
   const [person, setPerson] = useState<object[]>([]);
 
-  const items = useSelector(selectItems);
+  const items: object[] = useSelector(selectItems);
   const total = useSelector(selectTotal);
 
   const deliveryFee = 2500;
   const finalTotal = total + deliveryFee;
+
+  // Handle Paystack Payment
+  const config = {
+    reference: new Date().getTime().toString(),
+    email: email,
+    amount: parseFloat(finalTotal * 100),
+    publicKey: "pk_test_c2269f877802b324fdb3abc7554c34d137d13780",
+  };
+
+  const initializePayment = usePaystackPayment(config);
 
   useEffect(() => {
     axios
@@ -41,7 +64,38 @@ export default function Checkout() {
         // handle error
         console.log(error);
       });
-  }, [session]);
+  }, []);
+
+  // HANDLE ON SUCCESS EVENT
+  const onSuccess = (reference) => {
+    console.log(reference);
+    toast.success(
+      `You payment was of  ₦${finalTotal} : ${reference.reference} was successfull`
+    );
+
+    const orderdItems = { email, items };
+
+    // Submit Cart Items To Orders API
+    fetch("/api/orders", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(orderdItems),
+    });
+
+    // redirect to profile page
+    router.push("/order-successfull");
+
+    // empty cart items
+    dispatch(emptyCart());
+  };
+
+  // HANDLE CLOSE EVENT ON PAYSTACK MODAL
+  const onClose = () => {
+    toast.warn(`You dismissed the transaction.`);
+  };
 
   return (
     <>
@@ -139,7 +193,7 @@ export default function Checkout() {
             </div>
 
             {/* Button */}
-            <Link href={"/"}>
+            <Link href={"/profile"}>
               <button className="w-full bg-white text-clayBrown font-medium tracking-wide py-3">
                 Edit Delivery Details
               </button>
@@ -196,7 +250,12 @@ export default function Checkout() {
 
         {/* PAYMENT GATEWAY BUTTON */}
         {total > 0 && (
-          <button className="w-full bg-clayBrown text-white font-medium tracking-wide py-3">
+          <button
+            className="w-full bg-clayBrown text-white font-medium tracking-wide py-3"
+            onClick={() => {
+              initializePayment(onSuccess, onClose);
+            }}
+          >
             PAY
           </button>
         )}
@@ -205,10 +264,4 @@ export default function Checkout() {
   );
 }
 
-export async function getServerSideProps(context: any) {
-  return requireAuthentication(context, ({ session }: any) => {
-    return {
-      props: { session },
-    };
-  });
-}
+Checkout.auth = true;
