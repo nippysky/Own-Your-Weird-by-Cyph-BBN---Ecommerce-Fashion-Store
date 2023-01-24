@@ -159,7 +159,9 @@ export default function FemaleProductDetails(props: any) {
                         Select
                       </option>
                       {female.size.map((size: any) => (
-                        <option value={size}>{size}</option>
+                        <option key={size} value={size}>
+                          {size}
+                        </option>
                       ))}
                     </select>
                   </div>

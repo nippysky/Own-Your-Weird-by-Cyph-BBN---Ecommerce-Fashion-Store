@@ -160,7 +160,9 @@ export default function UnisexProductDetails(props: any) {
                         Select
                       </option>
                       {unisex.size.map((size: any) => (
-                        <option value={size}>{size}</option>
+                        <option key={size} value={size}>
+                          {size}
+                        </option>
                       ))}
                     </select>
                   </div>
