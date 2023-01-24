@@ -218,7 +218,9 @@ export default function UnisexProductDetails(props: any) {
                         Select
                       </option>
                       {unisex.color.map((color: any) => (
-                        <option value={color}>{color}</option>
+                        <option key={color} value={color}>
+                          {color}
+                        </option>
                       ))}
                     </select>
                   </div>

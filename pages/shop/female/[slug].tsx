@@ -217,7 +217,9 @@ export default function FemaleProductDetails(props: any) {
                         Select
                       </option>
                       {female.color.map((color: any) => (
-                        <option value={color}>{color}</option>
+                        <option key={color} value={color}>
+                          {color}
+                        </option>
                       ))}
                     </select>
                   </div>
