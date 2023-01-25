@@ -17,6 +17,8 @@ import { useSession } from "next-auth/react";
 
 export default function Bag() {
   const { data: session } = useSession();
+  //@ts-ignore
+  const userId = session?.user?.id;
   const items = useSelector(selectItems);
   const total = useSelector(selectTotal);
 
@@ -146,7 +148,7 @@ export default function Bag() {
               </p>
             </div>
             {session ? (
-              <Link href={"/shop/checkout"}>
+              <Link href={`/shop/checkout/${userId}`}>
                 <button className="my-10 bg-clayBrown text-center py-3 w-full text-white font-semibold">
                   Proceed To Pay
                 </button>

@@ -1,8 +1,6 @@
-// @ts-nocheck
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Head from "next/head";
-import Navbar from "../../components/Navbar";
-import axios from "axios";
+import Navbar from "../../../components/Navbar";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { useSelector } from "react-redux";
@@ -10,67 +8,47 @@ import {
   emptyCart,
   selectItems,
   selectTotal,
-} from "../../redux/slices/bagSlice";
+} from "../../../redux/slices/bagSlice";
 
 import { usePaystackPayment } from "react-paystack";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
+import db from "../../../mongodb/connection";
+import User from "../../../mongodb/schema";
 
-export default function Checkout() {
+export default function Checkout({ user }: any) {
   const { data: session } = useSession();
+  //@ts-ignore
   const userId = session?.user?.id;
+  const email = user.email;
 
   const router = useRouter();
 
   // Redux Dispatch
   const dispatch = useDispatch();
 
-  const [person, setPerson] = useState<object[]>([]);
-
   const items: object[] = useSelector(selectItems);
-  const total = useSelector(selectTotal);
+  const total: number = useSelector(selectTotal);
 
-  const deliveryFee = 2500;
-  const finalTotal = total + deliveryFee;
+  const deliveryFee: number = 2500;
+  const finalTotal: number = total + deliveryFee;
 
   // Handle Paystack Payment
   const config = {
     reference: new Date().getTime().toString(),
     email: email,
-    amount: parseFloat(finalTotal * 100),
+    amount: finalTotal * 100,
     publicKey: "pk_test_c2269f877802b324fdb3abc7554c34d137d13780",
   };
 
   const initializePayment = usePaystackPayment(config);
 
-  useEffect(() => {
-    axios
-      .get("/api/user")
-      .then(function (response) {
-        // handle success
-        const gottenArray = response.data.data;
-        function filterByValue(array: any[], value: any) {
-          return array.filter(
-            (data) =>
-              JSON.stringify(data)
-                .toLowerCase()
-                .indexOf(value.toLowerCase()) !== -1
-          );
-        }
-        setPerson(filterByValue(gottenArray, email));
-      })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-      });
-  }, [email]);
-
   // HANDLE ON SUCCESS EVENT
-  const onSuccess = (reference) => {
-    console.log(reference);
+  // @ts-ignore
+  const onSuccess = (ref) => {
     toast.success(
-      `You payment was of  ₦${finalTotal} : ${reference.reference} was successfull`
+      `You payment was of  ₦${finalTotal} : ${ref.reference} was successfull`
     );
 
     const orderdItems = { email, items };
@@ -150,7 +128,7 @@ export default function Checkout() {
                 </div>
                 <div className="flex justify-end w-1/2">
                   <p className="font-medium tracking-wide text-[0.85rem] text-right">
-                    {person[0]?.email}
+                    {user.email}
                   </p>
                 </div>
               </div>
@@ -162,7 +140,7 @@ export default function Checkout() {
                 </div>
                 <div className="flex justify-end w-1/2">
                   <p className="font-medium tracking-wide text-[0.85rem] text-right">
-                    {person[0]?.firstName + " " + person[0]?.lastName}
+                    {user.firstName + " " + user.lastName}
                   </p>
                 </div>
               </div>
@@ -174,7 +152,7 @@ export default function Checkout() {
                 </div>
                 <div className="flex justify-end w-1/2">
                   <p className="font-medium tracking-wide text-[0.85rem] text-right">
-                    {person[0]?.phoneNumber}
+                    {user.phoneNumber}
                   </p>
                 </div>
               </div>
@@ -186,7 +164,7 @@ export default function Checkout() {
                 </div>
                 <div className="flex justify-end w-1/2">
                   <p className="font-medium tracking-wide text-[0.85rem] text-right">
-                    {person[0]?.dAddress}
+                    {user.dAddress}
                   </p>
                 </div>
               </div>
@@ -253,6 +231,7 @@ export default function Checkout() {
           <button
             className="w-full bg-clayBrown text-white font-medium tracking-wide py-3"
             onClick={() => {
+              // @ts-ignore
               initializePayment(onSuccess, onClose);
             }}
           >
@@ -262,6 +241,14 @@ export default function Checkout() {
       </section>
     </>
   );
+}
+
+export async function getServerSideProps(context: { query: { userId: any } }) {
+  const { userId } = context.query;
+  await db.connect();
+  const user = await User.findById(userId).lean();
+
+  return { props: { user: JSON.parse(JSON.stringify(user)) } };
 }
 
 Checkout.auth = true;
