@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 main,
-htnl,
+html,
 body {
   @apply bg-white scrollbar-hide scroll-smooth;
 }
