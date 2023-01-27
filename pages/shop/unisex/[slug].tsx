@@ -152,8 +152,6 @@ export default function UnisexProductDetails(props: any) {
                       onChange={(event) => setSize(event.target.value)}
                       value={size}
                       required
-                      id="reason"
-                      name="reason"
                       className="w-full h-14 bg-formBG2 border-none focus:ring-0 mt-3"
                     >
                       <option value="" disabled selected hidden>
@@ -210,8 +208,6 @@ export default function UnisexProductDetails(props: any) {
                       onChange={(event) => setColor(event.target.value)}
                       value={color}
                       required
-                      id="reason"
-                      name="reason"
                       className="w-full h-14 bg-formBG2 border-none focus:ring-0 mt-3"
                     >
                       <option value="" disabled selected hidden>
