@@ -278,10 +278,7 @@ export default function UnisexProductDetails(props: any) {
 
               <div className="w-full flex justify-center items-center mt-20">
                 <Link href={"/shop/unisex"}>
-                  <button
-                    className="font-semibold bg-transparent border border-chocoBrown text-center text-clayBrown py-3 px-20"
-                    onClick={addItemToBag}
-                  >
+                  <button className="font-semibold bg-transparent border border-chocoBrown text-center text-clayBrown py-3 px-20">
                     Load More
                   </button>
                 </Link>
